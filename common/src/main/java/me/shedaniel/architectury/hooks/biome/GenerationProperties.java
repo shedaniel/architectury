@@ -19,6 +19,7 @@
 
 package me.shedaniel.architectury.hooks.biome;
 
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.level.levelgen.GenerationStep;
 import net.minecraft.world.level.levelgen.carver.ConfiguredWorldCarver;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
@@ -39,11 +40,19 @@ public interface GenerationProperties {
     List<Supplier<ConfiguredStructureFeature<?, ?>>> getStructureStarts();
     
     interface Mutable extends GenerationProperties {
+        Mutable setSurfaceBuilder(ResourceKey<ConfiguredSurfaceBuilder<?>> builder);
+        
         Mutable setSurfaceBuilder(ConfiguredSurfaceBuilder<?> builder);
+        
+        Mutable addFeature(GenerationStep.Decoration decoration, ResourceKey<ConfiguredFeature<?, ?>> feature);
         
         Mutable addFeature(GenerationStep.Decoration decoration, ConfiguredFeature<?, ?> feature);
         
+        Mutable addCarver(GenerationStep.Carving carving, ResourceKey<ConfiguredWorldCarver<?>> feature);
+        
         Mutable addCarver(GenerationStep.Carving carving, ConfiguredWorldCarver<?> feature);
+        
+        Mutable addStructure(ResourceKey<ConfiguredStructureFeature<?, ?>> feature);
         
         Mutable addStructure(ConfiguredStructureFeature<?, ?> feature);
         

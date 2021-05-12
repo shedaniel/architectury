@@ -8,8 +8,8 @@
   ],
   "mixins": [
     "BiomeGenerationSettingsBuilderAccessor", "GameRulesAccessor", "GameRulesAccessor$BooleanValue", "GameRulesAccessor$BooleanValueSimple",
-    "GameRulesAccessor$IntegerValue", "GameRulesAccessor$IntegerValueSimple", "MixinBlockEntity", "MixinBlockEntityExtension", "MixinItemExtension",
-    "MixinRegistryEntry", "MobSpawnSettingsBuilderAccessor"
+    "GameRulesAccessor$IntegerValue", "GameRulesAccessor$IntegerValueSimple", "MixinBiome", "MixinBlockEntity", "MixinBlockEntityExtension",
+    "MixinItemExtension", "MixinRegistryEntry", "MobSpawnSettingsBuilderAccessor"
   ],
   "injectors": {
     "defaultRequire": 1

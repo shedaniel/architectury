@@ -25,6 +25,7 @@ import me.shedaniel.architectury.hooks.biome.*;
 import me.shedaniel.architectury.mixin.forge.BiomeGenerationSettingsBuilderAccessor;
 import me.shedaniel.architectury.mixin.forge.MobSpawnSettingsBuilderAccessor;
 import me.shedaniel.architectury.registry.BiomeModifications.BiomeContext;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobCategory;
@@ -334,25 +335,49 @@ public class BiomeModificationsImpl {
         public MutableGenerationSettingsBuilderWrapped(BiomeGenerationSettingsBuilder generation) {
             super(generation);
         }
-        
+    
+        @Override
+        public Mutable setSurfaceBuilder(ResourceKey<ConfiguredSurfaceBuilder<?>> builder) {
+            // TODO Read from RegistryReadOps#registryHolder
+            return this;
+        }
+    
         @Override
         public Mutable setSurfaceBuilder(ConfiguredSurfaceBuilder<?> builder) {
             generation.surfaceBuilder(builder);
             return this;
         }
-        
+    
+        @Override
+        public Mutable addFeature(GenerationStep.Decoration decoration, ResourceKey<ConfiguredFeature<?, ?>> feature) {
+            // TODO Read from RegistryReadOps#registryHolder
+            return this;
+        }
+    
         @Override
         public Mutable addFeature(GenerationStep.Decoration decoration, ConfiguredFeature<?, ?> feature) {
             generation.addFeature(decoration, feature);
             return this;
         }
-        
+    
+        @Override
+        public Mutable addCarver(GenerationStep.Carving carving, ResourceKey<ConfiguredWorldCarver<?>> feature) {
+            // TODO Read from RegistryReadOps#registryHolder
+            return this;
+        }
+    
         @Override
         public Mutable addCarver(GenerationStep.Carving carving, ConfiguredWorldCarver<?> feature) {
             generation.addCarver(carving, feature);
             return this;
         }
-        
+    
+        @Override
+        public Mutable addStructure(ResourceKey<ConfiguredStructureFeature<?, ?>> feature) {
+            // TODO Read from RegistryReadOps#registryHolder
+            return this;
+        }
+    
         @Override
         public Mutable addStructure(ConfiguredStructureFeature<?, ?> feature) {
             generation.addStructureStart(feature);
