@@ -1,0 +1,56 @@
+/*
+ * This file is part of architectury.
+ * Copyright (C) 2020, 2021 architectury
+ *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU Lesser General Public
+ * License as published by the Free Software Foundation; either
+ * version 3 of the License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with this program; if not, write to the Free Software Foundation,
+ * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ */
+
+package me.shedaniel.architectury.impl.access;
+
+import me.shedaniel.architectury.core.access.AccessPoint;
+import me.shedaniel.architectury.core.access.specific.LevelAccessPoint;
+import me.shedaniel.architectury.core.access.specific.LevelAccess;
+import net.minecraft.world.level.Level;
+
+public class LevelAccessPointImpl<T, SELF extends LevelAccessPointImpl<T, SELF>> implements LevelAccessPoint<T, SELF> {
+    private final AccessPoint<LevelAccess<T>, ?> parent;
+    
+    public LevelAccessPointImpl() {
+        this.parent = AccessPoint.create(ts -> level -> {
+            return processIterable(ts, level);
+        });
+    }
+    
+    private T processIterable(Iterable<LevelAccess<T>> iterable, Level level) {
+        for (LevelAccess<T> accessor : iterable) {
+            T t = accessor.getByLevel(level);
+            if (t != null) {
+                return t;
+            }
+        }
+        
+        return null;
+    }
+    
+    @Override
+    public AccessPoint<LevelAccess<T>, ?> getParent() {
+        return parent;
+    }
+    
+    @Override
+    public T getByLevel(Level level) {
+        return get().getByLevel(level);
+    }
+}
